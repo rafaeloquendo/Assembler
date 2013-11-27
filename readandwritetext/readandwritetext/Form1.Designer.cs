@@ -28,30 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnOpen = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnOpen2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(33, 107);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(274, 231);
-            this.textBox1.TabIndex = 0;
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(125, 358);
+            this.btnOpen.Location = new System.Drawing.Point(277, 223);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(75, 23);
             this.btnOpen.TabIndex = 1;
-            this.btnOpen.Text = "First Pass";
+            this.btnOpen.Text = "Assemble";
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
@@ -85,24 +74,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "CSC 111";
             // 
-            // btnOpen2
-            // 
-            this.btnOpen2.Location = new System.Drawing.Point(404, 358);
-            this.btnOpen2.Name = "btnOpen2";
-            this.btnOpen2.Size = new System.Drawing.Size(83, 23);
-            this.btnOpen2.TabIndex = 5;
-            this.btnOpen2.Text = "Second Pass";
-            this.btnOpen2.UseVisualStyleBackColor = true;
-            this.btnOpen2.Click += new System.EventHandler(this.btnOpen2_Click);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(313, 107);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(274, 231);
-            this.textBox2.TabIndex = 6;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -110,13 +81,10 @@
             this.BackColor = System.Drawing.SystemColors.HotTrack;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(686, 443);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.btnOpen2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnOpen);
-            this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "ASSEMBLER";
             this.ResumeLayout(false);
@@ -126,13 +94,10 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnOpen2;
-        private System.Windows.Forms.TextBox textBox2;
     }
 }
 

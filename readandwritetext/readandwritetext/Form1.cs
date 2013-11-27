@@ -17,119 +17,72 @@ namespace readandwritetext
         public Form1()
         {
             InitializeComponent();
-            btnOpen2.Hide();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            textBox1.Clear();
             String file_name = "\\test.txt"; // provides the location for our file name in this case its test.txt
             String textLine = ""; // creates a textLine of string text
-            ArrayList findSubroutine = new ArrayList(); // I am creating an array to insert all individual items into the array. 
+            ArrayList findSubroutine = new ArrayList(); // Only saves the  subroutines
+            
             file_name = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + file_name; // gets my specific object txt location
             System.IO.StreamReader objReader; // System.IO.StreamReader creates an objReader which ill use later in the program.
             objReader = new System.IO.StreamReader(file_name);
+            ArrayList location = new ArrayList();
+
+            string[] insructions = {"NOP", "MULS","ADD","SUB","LDI","AND","OR","RJMP","SLEEP","TST"};
+            string[] opcodes = {"0000000000000000","00000010","000011","000110","1110","001000","001010","1100","1001010110001000","001000"};
+
             
+            string test = ""; // created to test if we are able to attach opcodes from function together *which was successful*
+            
+            for (int i = 0; i < opcodes.Length; i++)
+            {
+                if (opcodes[i].Count() < 16)
+                {
+                    MessageBox.Show("This mother fucker has less than 16 characters " + i);
+                    test = getOp(opcodes[i], "something", "somethingelse");
+                }
+            }
+
+            MessageBox.Show(test);
+
+            int x = 1;
             while (objReader.Peek() != -1)
             {
                 textLine = objReader.ReadLine() + "\r\n"; //reads this line by line
-                findSubroutine.Add(textLine); // adds each textLine to my arraylist
-            }
-            
-            string[] s1 = new string[10]; //create a string array for better manipulation of the items added to arraylist
-            //this forloop adds each item to my string array from arraylist
-            for (int i = 0; i <= 9; i++ )
-            {
-                s1[i] = findSubroutine[i].ToString(); 
+                if (textLine.Contains(":"))
+                {
+                    findSubroutine.Add(textLine);
+                    location.Add(x);
+                }
+                x++;
             }
 
-            
-            string subroutine = "";
-            string test = "";
-            
-            int location = 0;
-            int numberOfSubroutine = 0;
-            
-            for (int i = 0; i < s1.Length; i++)
+            //code just for testing location and subroutine.
+            for (int i = 0; i < findSubroutine.Count; i++)
             {
-                test = s1[i];
-                //MessageBox.Show(test);
-                if (test.Contains(":"))
-                {
-                    subroutine = test;
-                    subroutine = Regex.Replace(subroutine, @"[:]", "");
-                    location = i+1;
-                    numberOfSubroutine++;
-                }
-            }
-            
-            //this looks for multiple subroutines
-            string[] subroutines = new string[numberOfSubroutine];
-            int[] locations = new int[numberOfSubroutine];
-            
-            if (numberOfSubroutine > 0)
-            {
-                for (int i = 0; i < s1.Length; i++)
-                {
-                    test = s1[i];
-                    if (test.Contains(":"))
-                    {
-                        subroutines[i] = test;
-                        locations[i] = i+1;
-                    }
-                   // MessageBox.Show("Pass One Completed****\nMultiple Subroutine located : " + (i+1) + " subroutine is " + subroutines[i] + "\nIts location is at line number : "+ locations[i]);
-                }
-
-            }
-            else
-            { 
-                textBox1.Text = subroutine;
-                MessageBox.Show("Pass One Completed*****\n A Subroutine was located: " + subroutine +"\nLocated at line number " + location);
-            }
-           
-            for (int i = 0; i < subroutines.Length; i++)
-            {
-                MessageBox.Show("Pass One Completed****\nMultiple Subroutine located : " + (i+1) + " subroutine is " + subroutines[i] + "\nIts location is at line number : "+ locations[i]);
+                //MessageBox.Show(findSubroutine[i].ToString());
+                //MessageBox.Show(location[i].ToString());
             }
             objReader.Close();
-            btnOpen2.Show();
-            btnOpen.Hide();
         }
-
-        //NOTE is btnOpen2 is clicked before btnOpen1 then I created it to run btnOpen1 first
-        private void btnOpen2_Click(object sender, EventArgs e)
+        // this function is to complete the missing opcodes
+        public string getOp(string opcodes, string p1, string p2) //parameter 1, param 2
         {
-            String file_name = "\\test.txt"; 
-            String textLine = ""; 
-
-            file_name = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + file_name;
-            System.IO.StreamReader objReader; 
-            objReader = new System.IO.StreamReader(file_name);
-            
-            string[] s1 = new string[10];
-            for (int i = 0; i <= 9; i++)
-            { 
-                textLine = objReader.ReadLine() + "\r\n";
-                s1[i] = textLine;
-            }
-            int[] location = new int[10];
-            //creates a location for the s1 array
-            ArrayList a1 = new ArrayList(); // will be used to print out the messagebox to textbox
-            for (int i = 0; i <= 9; i++)
-            {
-                location[i] = i;
-               // MessageBox.Show("SAVED " + s1[i] + "to INDEX " + location[i]);
-            }
-            //this for loops prints out where we saved the s1 locations
-            string text = "";
-            for (int i = 0; i <= 9; i++)
-            {
-                text = text + "SAVED " + s1[i] + "to INDEX " + location[i] + "\r\n";
-                textBox2.Text = text;
-            }
-            objReader.Close();
-            MessageBox.Show("Congrats Pass Two Completed. All Index successfully saved Index Array()");
-            btnOpen2.Hide();
+            string send = opcodes + p1 + p2; //we assume we get registers in hex
+            return send;
         }
+
+        //convert from hex to binary
+        public string hex2binary(string hexvalues)
+        {
+            string binaryValue = "";
+            binaryValue = Convert.ToString(Convert.ToInt32(hexvalues,16),2);
+            return binaryValue;
+        }
+
+        
+        //we need a function that determines if have less than 16 characters to call the getOp function. 
     }
 }
